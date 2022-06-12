@@ -5,7 +5,7 @@ from sklearn.decomposition              import NMF, LatentDirichletAllocation
 from sklearn.feature_extraction.text    import TfidfVectorizer, CountVectorizer
 import nltk
 from nltk.corpus import stopwords as nltk_stopwords
-nltk.download('stopwords')
+# nltk.download('stopwords')
 
 
 def print_top_words(model, feature_names, n_top_words, file=None):
@@ -119,15 +119,15 @@ def topics(df, model="lda", language=False, save=False):
                                             learning_offset=50.,
                                             random_state=0)
             topic_model.fit(tf)
-            feature_names = tf_vectorizer.get_feature_names()
+            feature_names = tf_vectorizer.get_feature_names_out()
         else:
             # MNF uses tfidf
             tfidf_vectorizer = TfidfVectorizer(max_df=0.95, min_df=2, stop_words=stopwords)
             tfidf = tfidf_vectorizer.fit_transform(data_samples)
-            feature_names = tfidf_vectorizer.get_feature_names()
+            feature_names = tfidf_vectorizer.get_feature_names_out()
 
             # Run NMF
-            topic_model = NMF(n_components=5, random_state=1, alpha=.1, l1_ratio=.5, 
+            topic_model = NMF(n_components=5, random_state=1, alpha_W=.1, l1_ratio=.5, 
                               init='nndsvd')
             topic_model.fit(tfidf)
         

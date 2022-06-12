@@ -48,8 +48,10 @@ def import_data(file, path = ''):
     # Convert dictionary to dataframe
     df = pd.DataFrame(columns=['Message_Raw', 'User'])
 
+    df_lst = []
     for name in messages.keys():
-        df = df.append(pd.DataFrame({'Message_Raw': messages[name], 'User': name}))
+        df_lst.append(pd.DataFrame({'Message_Raw': messages[name], 'User': name}))
+    df = pd.concat(df_lst)
 
     df.reset_index(inplace=True)
 

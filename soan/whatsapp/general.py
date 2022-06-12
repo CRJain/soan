@@ -520,7 +520,7 @@ def print_timing(df, save=False):
     response = df[(df.Response_Time/60/60/24) > 1]
 
     # Then, for each user calculate the average response time
-    print_title("Nr. Initiated Messages", file=file)
+    print_title("No. of Initiated Messages", file=file)
     
     for user in response.User.unique():
         nr_initiated = len(response.loc[response.User == user])
