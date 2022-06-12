@@ -15,7 +15,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 import nltk
 from nltk.corpus import stopwords as nltk_stopwords
-nltk.download('stopwords')
+# nltk.download('stopwords')
 
 
 def count_words_per_user(df, sentence_column = "Message_Only_Text", user_column = "User"):

@@ -81,9 +81,12 @@ def main():
     del temp
 
     # Emoji
-    # emoji.print_stats(unique_emoji, counts, save=True)
-    for user in users:
-        emoji.plot_counts(counts, user=user, savefig=True)
+    # Print Stats to a file
+    emoji.print_stats(unique_emoji, counts, save=True)
+
+    # Export a Bar Chart Image
+    # for user in users:
+    #     emoji.plot_counts(counts, user=user, savefig=True)
 
     # Topic modeling
     topic.topics(df, model='lda', language=args.language, save=True)
@@ -98,7 +101,7 @@ def main():
     # Wordclouds
     # Counts words and create dictionary of words with counts
     counts = tf_idf.count_words_per_user(df, sentence_column="Message_Only_Text", user_column="User")
-    counts = tf_idf.remove_stopwords(counts, language="dutch", column="Word")
+    counts = tf_idf.remove_stopwords(counts, language=args.language, column="Word")
 
     for user in users:
         words = counts[["Word", user]].set_index('Word').to_dict()[user]

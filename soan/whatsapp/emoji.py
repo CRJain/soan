@@ -136,7 +136,7 @@ def get_unique_emojis(df, counts, list_of_words):
 def extract_emojis(str):
     """ Used to extract emojis from a string using the emoji package
     """
-    return ''.join(c for c in str if c in emoji_package.UNICODE_EMOJI)
+    return ''.join(c for c in str if c in emoji_package.EMOJI_DATA)
 
 def prepare_data(df):
     """ Prepares the data by extracting and 
@@ -187,7 +187,7 @@ def print_stats(unique_emoji, counts, save=False):
     
     """
     if save:
-        file = open("results/emoji.txt", "a")
+        file = open("results/emoji.txt", "a", encoding="utf-8")
     else:
         file = None
     
@@ -199,7 +199,7 @@ def print_stats(unique_emoji, counts, save=False):
     for user in unique_emoji.keys():
         print(user, file=file)
         unique_emoji[user] = Counter(unique_emoji[user])
-        for emoji, score in unique_emoji[user].most_common(3):
+        for emoji, score in unique_emoji[user].most_common(10):
             print(emoji, score, file=file)
         print(file=file)
 
@@ -211,7 +211,7 @@ def print_stats(unique_emoji, counts, save=False):
     for user in counts.keys():
         print(user, file=file)
         counts[user] = Counter(counts[user])
-        for emoji, score in counts[user].most_common(3):
+        for emoji, score in counts[user].most_common(10):
             print(emoji, score, file=file)
         print(file=file)
 
@@ -245,7 +245,7 @@ def plot_counts(counts, user, savefig=False):
     plt.xticks([])
     
     # Set labels
-    ax.set_ylabel('Nr Words')
+    ax.set_ylabel('No. of Words')
     plt.title("Most often used Emoji")
     from matplotlib.font_manager import FontProperties
 
